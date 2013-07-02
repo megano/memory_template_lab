@@ -1,1 +1,9 @@
-This is a code-along demonstration of creating a memory game in HTML/CSS/Javascript.
+Week 3, day 2 lab
+
+Finish memory game, in script.js:
+- finish 'handle_click' event handler
+- See function 'stubs' for everything you need, implement functions
+
+Bonus:
+- Make tiles appear randomly
+- Play sound when game ends.
