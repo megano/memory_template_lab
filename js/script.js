@@ -18,33 +18,38 @@ function handle_click(){
       return false;
   }
 
+  if (is_two_selected()) {
+    deactivate_tiles();
+  }
   // keep track of number of clicks
   num_clicks++;
 
   //activate tile
   activate_tile(tile);
-  // maybe more here?
 
   if (is_two_selected() && is_current_selection_a_match()) {
-    // implement
+    // implement:
+    // Set both tiles to 'matched' (e.g. add class 'matched')
+    // if game is over, display 'congrats'
   }
-  alert('clicked!');
 }
 
 
 function is_two_selected(){
   // implement
+  // Perhaps check length of variable 'selected'?
   return false;
 }
 
 function is_current_selection_a_match(){
   // implement
+  // Check if images of the selected tiles are the same
   return false;
 }
 
 function deactivate_tiles() {
-  // deactivates ALL tiles
   //implement
+  // remove 'activate' class from all tiles
 }
 
 function activate_tile(tile){
@@ -54,11 +59,13 @@ function activate_tile(tile){
 
 function is_game_over(){
   //implement
+  //is number of 'matched' tiles same as number of tiles?
 }
 
 function handle_win(){
   // implement
-  // perhaps display 'congrats' panle?! reset board?
+  // display 'congrats' panel with number of clicks
+  // reset board
 }
 
 // register event handler for tiles
@@ -67,18 +74,4 @@ $.each(tiles, function(index, tile) {
   tile.on('click', handle_click);
 });
 
-// NOTES
-// if clicked, apply 'active' style
-// if clicked, disable it
-
-// if two images clicked,
-//compare if they are the same
-//if so , we have a match
-// -> for both, apply 'matched' style
-//    and disable
-//if not
-// -> reset tiles to 'hidden' style
-
-// the game is over when all tiles are matched
-// show 'Congrats' and reset board,
 });
