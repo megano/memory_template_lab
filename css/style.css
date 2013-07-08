@@ -11,8 +11,7 @@ body {
   background:#b80000;
 }
 
-#board .tile,
-#board .tile img {
+#board .tile, #board .tile img {
   display:block;
   width:100px;
   height:100px;
@@ -20,16 +19,24 @@ body {
   border-radius: 50%;
 }
 
+#board .tile span {
+  position: relative;
+  top: -30px;
+  left: 23px;
+  color: white;
+  visibility: hidden;
+}
+
 #board .tile img {
   visibility:hidden;
 }
 
-#board .tile.active img {
+#board .tile.active img, #board .tile.matched img {
   visibility:visible;
 }
 
-#board .tile.matched img {
-  visibility:visible;
+#board .tile.active span, #board .tile.matched span {
+  visibility: visible;
 }
 
 #board .tile.matched {

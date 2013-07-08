@@ -1,4 +1,27 @@
+(function($) {
+
+$.fn.randomize = function(childElem) {
+  return this.each(function() {
+      var $this = $(this);
+      var elems = $this.children(childElem);
+
+      elems.sort(function() { return (Math.round(Math.random())-0.5); });  
+
+      $this.remove(childElem);  
+
+      for(var i=0; i < elems.length; i++)
+        $this.append(elems[i]);      
+
+  });    
+}
+})(jQuery);
+
+
+
 $(function(){
+
+
+$('#board').randomize('.tile');
 'use strict';
 
 //var $events = $('body');
@@ -26,30 +49,45 @@ function handle_click(){
 
   //activate tile
   activate_tile(tile);
+  // maybe more here?
 
   if (is_two_selected() && is_current_selection_a_match()) {
-    // implement:
-    // Set both tiles to 'matched' (e.g. add class 'matched')
-    // if game is over, display 'congrats'
+    $('.tile.active').addClass('matched');
+  }
+  console.log('clicked!');
+  if (is_game_over()) {
+    handle_win();
   }
 }
 
 
 function is_two_selected(){
-  // implement
-  // Perhaps check length of variable 'selected'?
-  return false;
+  if ( $('.tile.active').length == 2){
+    return true;
+  }
+  else {
+    return false;
+  }
 }
+
+// short version of function is_two_selected(){
+//  return $('.tile.active').length == 2){
+// }
 
 function is_current_selection_a_match(){
-  // implement
-  // Check if images of the selected tiles are the same
+  if ($('.tile.active img').first().attr('src') === $('.tile.active img').last().attr('src')){
+  return true;
+  }
+  else {
   return false;
+  }
 }
 
+// An alternative way to match based on index
+// var pic1= selected[0].find('img'.attr('src');
+
 function deactivate_tiles() {
-  //implement
-  // remove 'activate' class from all tiles
+  $('.tile').removeClass('active');
 }
 
 function activate_tile(tile){
@@ -58,14 +96,22 @@ function activate_tile(tile){
 }
 
 function is_game_over(){
-  //implement
-  //is number of 'matched' tiles same as number of tiles?
+  if ($('.tile.matched').length === $('.tile').length) {
+    console.log('GAME OVER!!');
+    return true;
+  }
+  else {
+    console.log('game not over :-(');
+  }
 }
 
 function handle_win(){
   // implement
-  // display 'congrats' panel with number of clicks
-  // reset board
+  alert("Congratulations! You solved it in " + num_clicks + " clicks!");
+  $('.tile.matched').removeClass('matched').removeClass('active');
+    //javascript;
+  url = 'http://soundbible.com/grab.php?id=1003&type=mp3';
+  document.getElementById("sound").innerHTML="<embed src='"+url+"' hidden=true autostart=true loop=false>";
 }
 
 // register event handler for tiles
@@ -74,4 +120,20 @@ $.each(tiles, function(index, tile) {
   tile.on('click', handle_click);
 });
 
+
+
+// NOTES
+// if clicked, apply 'active' style
+// if clicked, disable it
+
+// if two images clicked,
+//compare if they are the same
+//if so , we have a match
+// -> for both, apply 'matched' style
+//    and disable
+//if not
+// -> reset tiles to 'hidden' style
+
+// the game is over when all tiles are matched
+// show 'Congrats' and reset board,
 });
